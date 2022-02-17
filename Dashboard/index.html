@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>GartenKnoten - Dashboard</title>
+
+        <!-- CSS Files -->
+        <link id="pagestyle" href="./style.css" rel="stylesheet" />
+
+        <!-- Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+        <!-- main javascript file -->
+        <script src="./script.js"></script>
+    </head>
+
+    <body>
+        <div class="grid-container">
+
+            <header class="header">
+                <div class="header_search">Search...</div>
+                <div class="header_avatar">Logout</div>
+            </header>
+
+            <aside class="aside">
+                <ul class="aside_list">
+                    <li class="aside_list-item">Batterie Status</li>
+                    <li class="aside_list-item">Lichtsensor Draußen</li>
+                    <li class="aside_list-item">Lichtsensor Drinnen</li>
+                    <li class="aside_list-item">Feuchtigkeitssensor</li>
+                    <li class="aside_list-item">Menu item #5</li>
+                </ul>
+            </aside>
+
+            <main class="main">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </main>
+
+            <footer class="footer">
+                <div class="footer_copyright">&copy;</div>
+                <div class="footer_byline">Made with &hearts;</div>
+            </footer>
+        </div>
+    </body>
+
+</html>
