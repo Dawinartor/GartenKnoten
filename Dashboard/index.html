@@ -12,15 +12,13 @@
         <!-- Chart.js -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
         <!-- main javascript file -->
-        <script src="./script.js"></script>
     </head>
 
     <body>
         <div class="grid-container">
 
             <header class="header">
-                <div class="header_search">Search...</div>
-                <div class="header_avatar">Logout</div>
+                <div class="header_title">Test</div>
             </header>
 
             <aside class="aside">
@@ -28,20 +26,26 @@
                     <li class="aside_list-item">Batterie Status</li>
                     <li class="aside_list-item">Lichtsensor Draußen</li>
                     <li class="aside_list-item">Lichtsensor Drinnen</li>
-                    <li class="aside_list-item">Feuchtigkeitssensor</li>
+                    <li class="aside_list-item">Luftdrucksensor</li>
                     <li class="aside_list-item">Menu item #5</li>
                 </ul>
             </aside>
 
             <main class="main">
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <div class="main_overview">
+
+
+                    <canvas id="myChart" width="100%" height="100%"></canvas>
+
+                </div>
             </main>
 
             <footer class="footer">
-                <div class="footer_copyright">&copy;</div>
-                <div class="footer_byline">Made with &hearts;</div>
+                <div class="footer_copyright">David & Lasse</div>
+                <div class="footer_byline">Gemacht mit Ideenreichtum und  &hearts;</div>
             </footer>
         </div>
+        <script src="./script.js"></script>
     </body>
 
 </html>
