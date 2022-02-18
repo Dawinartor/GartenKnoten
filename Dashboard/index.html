@@ -11,20 +11,19 @@
 
         <!-- Chart.js -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-        <!-- main javascript file -->
     </head>
 
     <body>
         <div class="grid-container">
 
             <header class="header">
-                <div class="header_title">Test</div>
+                <div class="header_title" id="headLine">Test</div>
             </header>
 
             <aside class="aside">
                 <ul class="aside_list">
                     <!-- drinnen & draußen jeweils im Vergleich zusammenfassen -->
-                    <li class="aside_list-item">Helligkeit draußen</li>
+                    <li class="aside_list-item" onclick="callHelligkeit()">Helligkeit draußen</li>
                     <li class="aside_list-item">Helligkeit drinnen</li>
                     <li class="aside_list-item">Temperatur draußen</li>
                     <li class="aside_list-item">Temperatur drinnen</li>
@@ -51,7 +50,10 @@
                 <div class="footer_byline">Gemacht mit Ideenreichtum und  &hearts;</div>
             </footer>
         </div>
+        <!-- main javascript file -->
         <script src="./script.js"></script>
+        <!-- Call sensor data functions -->
+        <script type="text/javascript" src="./SensorCalls/HelligkeitCall.js"></script>
     </body>
 
 </html>

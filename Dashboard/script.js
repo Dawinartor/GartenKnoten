@@ -1,12 +1,14 @@
-const ctx = document.getElementById('myChart').getContext('2d');
+//const ctx = document.getElementById('myChart').getContext('2d');
+/*
 const myChart = new Chart(ctx, {
     type: 'bar',
     responsive: true,
     maintainAspectRatio: false,
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Red'],
-        datasets: [{
-            label: '# of Votes',
+        labels: ['Drinnen', 'Draußen'],
+        datasets: [
+            {
+            label: ['# of Votes'],
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -24,8 +26,9 @@ const myChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
-        }]
+            borderWidth: 0.5
+        }
+    ]
     },
     options: {
         scales: {
@@ -35,3 +38,4 @@ const myChart = new Chart(ctx, {
         }
     }
 });
+*/
