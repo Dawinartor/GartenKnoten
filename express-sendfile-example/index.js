@@ -1,14 +1,14 @@
 const express = require('express'),
   app = express(),
-  mysql = require('mysql'), // import mysql module
+  mariadb = require('mariadb'), // import mysql module
   cors = require('cors'),
   bodyParser = require('body-parser');
 
 // setup database
-db = mysql.createConnection({
-  host: 'localhost',
+db = mariadb.createConnection({
+  host: '192.168.0.119',
   user: 'root',
-  password: 'root-gartenknoten',
+  password: 'root',
   database: 'wetterTestdaten'
 })
 
