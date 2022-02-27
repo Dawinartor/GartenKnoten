@@ -1,6 +1,7 @@
 //TODO: Chart.js verfügbar machen & Beispiel charts erstellen
 //TODO: Alle Methoden in app.js verfügbar machen
 //TODO: Als Parameter db daten verwenden
+const data = require('../../tools/db');
 
 // Manipulate DOM elements
 const headLine = document.getElementById('headLine'); //Headline is equal to shown data
@@ -9,6 +10,7 @@ const ctx = document.getElementById('myChart'); //Visual chart.js component
 // helligkeit drinnen & draußen
 function callHelligkeit(helligkeitsDaten) {
     headLine.innerHTML = "Hellikeit drinnen & Draußen";
+    
 }
 
 // Temperatur drinnen & draußen
