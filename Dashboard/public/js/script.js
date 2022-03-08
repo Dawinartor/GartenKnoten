@@ -1,16 +1,57 @@
 //TODO: Chart.js verfügbar machen & Beispiel charts erstellen
 //TODO: Alle Methoden in app.js verfügbar machen
 //TODO: Als Parameter db daten verwenden
-const data = require('../../tools/db');
 
 // Manipulate DOM elements
-const headLine = document.getElementById('headLine'); //Headline is equal to shown data
-const ctx = document.getElementById('myChart'); //Visual chart.js component
+//const headLine = document.getElementById('headLine'); //Headline is equal to shown data
+//const ctx = document.getElementById('myChart'); //Visual chart.js component
+
+// Methods to collect data from app.js and visualize them in script.js
+/** Creates a linear graph.
+ * 
+ * @param {string[]} labels informations for x-axis
+ * @param {int[]} dataToVisualize informations for y-axis
+ */
+function createLineGraph(labels, dataToVisualize, htmlCompoenent) {
+
+    const data = {
+        labels: labels,
+        datasets: [{
+          label: 'Blaaaaaa',
+          backgroundColor: 'rgb(255, 99, 232)',
+          borderColor: 'rgb(1, 1, 1)',
+          data: dataToVisualize
+        },
+        {
+            label: 'Blooooo',
+            backgroundColor: 'rgb(25, 39, 132)',
+            borderColor: 'rgb(100, 100, 100)',
+            data: dataToVisualize
+          }]
+      };
+
+    const config = {
+    type: 'line',
+    data: data,
+    options: {}
+    };
+
+    const myChart = new Chart(htmlCompoenent, config);
+
+}
+
+function testCall(was) {
+    das = String(was)
+    console.log(das);
+}
 
 // helligkeit drinnen & draußen
 function callHelligkeit(helligkeitsDaten) {
+    // Manipulate DOM elements
     headLine.innerHTML = "Hellikeit drinnen & Draußen";
-    
+
+    // example from charjs.org
+   createLineGraph(['1','2','3','4','5'], helligkeitsDaten, ctx);
 }
 
 // Temperatur drinnen & draußen
@@ -39,45 +80,7 @@ function callSpannung() {
 }
 
 
-
-//const ctx = document.getElementById('myChart').getContext('2d');
-/*
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    responsive: true,
-    maintainAspectRatio: false,
-    data: {
-        labels: ['Drinnen', 'Draußen'],
-        datasets: [
-            {
-            label: ['# of Votes'],
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 0.5
-        }
-    ]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-*/
+module.exports = {
+    testCall: testCall,
+    callHelligkeit: callHelligkeit
+  };
