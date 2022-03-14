@@ -1,12 +1,12 @@
 var mariadb = require('mariadb');
 
 var pool = mariadb.createPool({
-    host: '192.168.0.119',  // Replace with your host name
-    port: '3306', 
-    user: 'root',     // Replace with your database username
-    password: 'root',      // Replace with your database password
-    database: 'wetter',
-    connectionLimit: 5 // Replace with your database Name
+    host: '192.168.0.119', // Replace with your host name
+    port: '3306', // Replace with your database port, default 3306
+    user: 'root', // Replace with your database username
+    password: 'root', // Replace with your database password
+    database: 'wetter', // Replace with your database Name
+    connectionLimit: 5 
   }); 
 
 /**
@@ -15,10 +15,12 @@ var pool = mariadb.createPool({
 function testConnectWithDB() {
   pool.getConnection() // promise is used here
   .then(success => { // if promise successfull
-    console.log("Successfully connected"); 
-  }, noSuccess => { // if promise unsuccessfull
+    console.log("Successfully connected");
+    pool.end();
+    }, noSuccess => { // if promise unsuccessfull
     console.log("No connection established"); 
-  })
+    })
+  //.then(success.end());
 }
 
 
@@ -43,12 +45,22 @@ function callDatasets(howManyDatasets=1) {
   pool.getConnection()
   .then(connection => { // optional onRejected function
     connection.query("SELECT * FROM Daten LIMIT " + String(howManyDatasets))
-    .then((rows) => { // optional onRejected function
+    .then((rows) => {
       let collectedData = dbDataToObject(rows);
       console.log(collectedData);
+      return collectedData;
     })
   })
 }
+
+
+module.exports = {
+  testConnectWithDB: testConnectWithDB,
+  callDatasets: callDatasets, 
+  pool: pool
+};
+
+
 
 /*
 pool.getConnection()
@@ -78,7 +90,3 @@ conn.query("SELECT * FROM Daten LIMIT 2") // conn.query("SELECT * FROM Daten")
 });
 
 */
-module.exports = {
-  testConnectWithDB: testConnectWithDB,
-  callDatasets: callDatasets
-};

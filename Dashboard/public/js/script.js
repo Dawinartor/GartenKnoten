@@ -37,21 +37,17 @@ function createLineGraph(labels, dataToVisualize, htmlCompoenent) {
     };
 
     const myChart = new Chart(htmlCompoenent, config);
-
-}
-
-function testCall(was) {
-    das = String(was)
-    console.log(das);
 }
 
 // helligkeit drinnen & draußen
-function callHelligkeit(helligkeitsDaten) {
+function callHelligkeit() {
+    const headLine = document.getElementById('headLine'); //Headline is equal to shown data
+    const ctx = document.getElementById('myChart'); //Visual chart.js component
     // Manipulate DOM elements
     headLine.innerHTML = "Hellikeit drinnen & Draußen";
 
     // example from charjs.org
-   createLineGraph(['1','2','3','4','5'], helligkeitsDaten, ctx);
+   createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
 }
 
 // Temperatur drinnen & draußen
@@ -81,6 +77,5 @@ function callSpannung() {
 
 
 module.exports = {
-    testCall: testCall,
     callHelligkeit: callHelligkeit
   };

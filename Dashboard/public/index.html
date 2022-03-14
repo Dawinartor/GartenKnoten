@@ -33,7 +33,21 @@
 
             <main class="main">
                 <div class="main_overview">
+                    <!-- the graph div for visualisation of database information -->
                     <canvas id="myChart" width="100%" height="100%"></canvas>
+                    <!-- the form to choice which data to visualize -->
+                    <form class="main" id="data-choice"> 
+                        Wähle die Daten die du sehen willst:
+                        <select onchange="DisplayData(this)"> 
+                          <option>---</option>  
+                          <option>Helligkeit</option>
+                          <option>Temperatur</option>
+                          <option>Feuchtigkeit</option>
+                          <option>Luftdruck</option>
+                          <option>WLAN Signal</option>
+                          <option>Spannung</option>
+                        </select>
+                        </form>
                 </div>
             </main>
 
