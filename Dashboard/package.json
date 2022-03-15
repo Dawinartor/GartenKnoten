@@ -3,6 +3,7 @@
     "chart.js": "^3.7.1",
     "express": "^4.17.3",
     "handlebars": "^4.7.7",
+    "hbs": "^4.2.0",
     "mariadb": "^3.0.0"
   }
 }

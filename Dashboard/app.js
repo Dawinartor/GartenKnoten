@@ -8,7 +8,6 @@ app.use(express.static('public'));
 
 // Use functions from other files
 const { pool } = require('./tools/db');
-const { callHelligkeit } = require('./public/js/script');
 const { testConnectWithDB, callDatasets } = require('./tools/db');
 
 //testConnectWithDB();
@@ -17,23 +16,28 @@ const { testConnectWithDB, callDatasets } = require('./tools/db');
 // for testing purpose
 var mariadbObject;
 var mariadb = require('mariadb');
+//TODO: Add dotenv package with Dotenv environment variables from .env files
 mariadb.createConnection({
-  host: '192.168.0.119', // Replace with your host name
+    host: '192.168.0.119', // Replace with your host name
     port: '3306', // Replace with your database port, default 3306
     user: 'root', // Replace with your database username
     password: 'root', // Replace with your database password
     database: 'wetter', // Replace with your database Name
     connectionLimit: 5 
 })
-.then(function(value) {
-  console.log(value); // Success!
-  mariadbObject = value;
-}, function(reason) {
-  console.log(reason); // Error!
+.then(connection => {
+  connection.query("SELECT * FROM Daten LIMIT 3")
+  .then(getData => {
+    mariadbObject = getData;
+    connection.end();
+  })
+  .catch(err => {
+    console.log("Daten wurden nicht uebergeben");
+  });
 })
-.then(doIt => {
-  console.log(mariadbObject);
-});
+.catch(err => {
+  console.log("Verbindung konnte nicht aufgebaut werden");
+})
 
 //
 
@@ -41,19 +45,14 @@ mariadb.createConnection({
 
 
 app.get('/', (req, res, next) => {
-  console.log('Hallo');
+  console.log("mariadbObject");
   res.send('Hallo')
 });
 
 app.get('/test1', (req, res, next) => {
-  const aObject = {
-    one: 1,
-    two: 2,
-    string: 'I am a string'
-  };
-  const dbCollectedData = callDatasets();
-  console.log(dbCollectedData);
-  res.send(dbCollectedData);
+  console.log(mariadbObject);
+//  console.log(dbCollectedData);
+  res.send(mariadbObject);
 });
 
 //TODO: https://bm.enthuses.me/buffered.php?bref=729

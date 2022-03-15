@@ -74,8 +74,3 @@ function callWlanSignal() {
 function callSpannung() {
     headLine.innerHTML = "Spannung";
 }
-
-
-module.exports = {
-    callHelligkeit: callHelligkeit
-  };
