@@ -14,6 +14,32 @@ const { testConnectWithDB, callDatasets } = require('./tools/db');
 //testConnectWithDB();
 //callDatasets([1,2,3,4,5]);
 
+// for testing purpose
+var mariadbObject;
+var mariadb = require('mariadb');
+mariadb.createConnection({
+  host: '192.168.0.119', // Replace with your host name
+    port: '3306', // Replace with your database port, default 3306
+    user: 'root', // Replace with your database username
+    password: 'root', // Replace with your database password
+    database: 'wetter', // Replace with your database Name
+    connectionLimit: 5 
+})
+.then(function(value) {
+  console.log(value); // Success!
+  mariadbObject = value;
+}, function(reason) {
+  console.log(reason); // Error!
+})
+.then(doIt => {
+  console.log(mariadbObject);
+});
+
+//
+
+
+
+
 app.get('/', (req, res, next) => {
   console.log('Hallo');
   res.send('Hallo')

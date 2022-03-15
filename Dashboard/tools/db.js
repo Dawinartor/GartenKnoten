@@ -12,7 +12,7 @@ var pool = mariadb.createPool({
 /**
  * Tests connection with remote DB
  */
-function testConnectWithDB() {
+function testConnectWithDB() { //? is connection object returnable?
   pool.getConnection() // promise is used here
   .then(success => { // if promise successfull
     console.log("Successfully connected");
