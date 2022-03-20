@@ -39,7 +39,8 @@ mariadb.createConnection({
   console.log("Verbindung konnte nicht aufgebaut werden");
 })
 
-//
+
+// TODO: Extend the application with a GET method to collect data from the server in a intervall
 
 
 
@@ -58,15 +59,15 @@ app.get('/test1', (req, res, next) => {
 //TODO: https://bm.enthuses.me/buffered.php?bref=729
 
 app.get('/callTestData', (req, res, next) => { //! IS WORKING
-  let queryString = "SELECT * FROM Daten LIMIT 1";
+  let queryString = "SELECT * FROM Daten LIMIT 6";
   pool.getConnection()
   .then(connection => {
     connection.query(queryString)
     .then((rows) => {
       let collectedData = JSON.stringify(rows);
       let dataCollection = JSON.parse(collectedData);
-      console.log(dataCollection[0]);
-      res.send(data = dataCollection[0]);
+      console.log(dataCollection);
+      res.send(data = dataCollection);
     })
   })
 });
