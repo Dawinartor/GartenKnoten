@@ -59,7 +59,7 @@ app.get('/test1', (req, res, next) => {
 //TODO: https://bm.enthuses.me/buffered.php?bref=729
 
 app.get('/callTestData', (req, res, next) => { //! IS WORKING
-  let queryString = "SELECT * FROM Daten LIMIT 6";
+  let queryString = "SELECT * FROM Daten LIMIT 12";
   pool.getConnection()
   .then(connection => {
     connection.query(queryString)
