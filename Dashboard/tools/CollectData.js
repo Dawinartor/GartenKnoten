@@ -9,12 +9,27 @@ const moment = require('moment');
  * function to convert date from integer version into german date version
  * 
  * @param {int} dateAsInt - date as integer
- * @returns date in DD.MM.YYYY 
- *  
+ * @returns momentjs object
  */
 function convertDate(dateAsInt) {
     return moment(dateAsInt).format("DD.MM.YYYY");   
 }
+
+/**
+ * function to convert time from integer version into german time version
+ * 
+ * @param timeAsInt - time as integer
+ * @returns 
+ */
+function convertTime(timeAsInt) {
+    // convert time as integer version into string to split it
+    let timeString = String(timeAsInt);
+
+
+
+
+}
+
 
 function collectData() {
     // create arrays to collect data in specific place
@@ -22,9 +37,9 @@ function collectData() {
     let time = [];
     let place = [];
     let temperature = [];
-    let pressure = [];
+    let airPressure = [];
     let brightness  = [];
-    let wasserPegel = [];
+    let waterLevel = [];
 }
 
 
@@ -35,6 +50,7 @@ function collectData() {
 
 
 module.exports = {
-    convertDate: convertDate
+    convertDate: convertDate,
+    convertTime: convertTime
   };
   

@@ -46,6 +46,14 @@ function callHelligkeit() {
     // Manipulate DOM elements
     headLine.innerHTML = "Hellikeit drinnen & Draußen";
 
+    // try to access data from '/collectDataFromDB' through fetchAPI
+    const url = 'http://localhost:4001/collectDataFromDB';
+    fetch(url)
+    .then((collectedData) => collectedData.json())
+    .then(function(data) {
+        console.log(data);
+    })
+
     // example from charjs.org
    createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
 }

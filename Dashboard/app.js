@@ -3,6 +3,7 @@ const res = require('express/lib/response');
 const app = express();
 const path = require('path')
 const moment = require('moment');
+var mariadb = require('mariadb');
 
 // Serves Express Yourself website
 app.use(express.static('public'));
@@ -12,51 +13,48 @@ const { pool } = require('./tools/db');
 const { testConnectWithDB, callDatasets } = require('./tools/db');
 const { convertDate } = require('./tools/CollectData');
 
-//testConnectWithDB();
-//callDatasets([1,2,3,4,5]);
-
-// for testing purpose
-var mariadbObject;
-var mariadb = require('mariadb');
-//TODO: Add dotenv package with Dotenv environment variables from .env files
-mariadb.createConnection({
-    host: '192.168.1.101', // Replace with your host name
-    port: '3306', // Replace with your database port, default 3306
-    user: 'root', // Replace with your database username
-    password: 'root', // Replace with your database password
-    database: 'wetter', // Replace with your database Name
-    connectionLimit: 5 
-})
-.then(connection => {
-  connection.query("SELECT * FROM Daten LIMIT 3")
-  .then(getData => {
-    mariadbObject = getData;
-    connection.end();
-  })
-  .catch(err => {
-    console.log("Daten wurden nicht uebergeben");
-  });
-})
-.catch(err => {
-  console.log("Verbindung konnte nicht aufgebaut werden");
-})
-
 
 // TODO: Extend the application with a GET method to collect data from the server in a intervall
+//app.get('/collectDataFromDB/:howManyDatasets', (req, res, next) => {
+
+// Get data in a END-Point and collect them with Fetch-API
+app.get('/collectDataFromDB', (req, res, next) => {
+  var mariadbObject;
+
+  //TODO: Add dotenv package with Dotenv environment variables from .env files
+  mariadb.createConnection({
+      host: '192.168.1.101', // Replace with your host name
+      port: '3306', // Replace with your database port, default 3306
+      user: 'root', // Replace with your database username
+      password: 'root', // Replace with your database password
+      database: 'wetter', // Replace with your database Name
+      connectionLimit: 5 
+  })
+  .then(connection => { // in case of success
+    connection.query("SELECT * FROM Daten LIMIT 12")
+    
+    .then(getData => {
+      mariadbObject = getData;
+      connection.end();
+      res.send(mariadbObject);
+    }) 
+    .catch(err => {
+      console.log("Daten wurden nicht uebergeben");
+    });
+
+  })
+  .catch(err => { // in case of failure
+    console.log("Verbindung konnte nicht aufgebaut werden");
+  })
+})
 
 
-
-
+//! this is the landingpage 
 app.get('/', (req, res, next) => {
-  console.log("Hallo Welt");
+  console.log("Hello");
   res.send('Hallo');
 });
 
-app.get('/test1', (req, res, next) => {
-  let nDate = convertDate(202109030);
-  console.log(nDate instanceof String);
-  res.send(mariadbObject);
-});
 
 //TODO: https://bm.enthuses.me/buffered.php?bref=729
 

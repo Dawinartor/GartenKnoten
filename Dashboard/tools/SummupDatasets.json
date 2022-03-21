@@ -1,0 +1,45 @@
+{
+    "idea": "connect all datasets of one date and time into one dataset",
+    "comment": " ",
+    "example": {
+                    "dataset": "10:00:06 - 29.09.2021",
+                    "places": [
+                        {
+                            "Ort": "Garten",
+                            "Temperatur": 22.60,
+                            "Feuchtigkeit": 64,
+                            "Druck": 1015,
+                            "Licht": 1380,
+                            "Pegel-oben": null,
+                            "pegel-unten": null
+                        },
+                        {
+                            "Ort": "Gewächshaus",
+                            "Temperatur": 15.60,
+                            "Feuchtigkeit": 91,
+                            "Druck": 1015,
+                            "Licht": 1380,
+                            "Pegel-oben": null,
+                            "pegel-unten": null
+                        },
+                        {
+                            "Ort": "Regentonne oben",
+                            "Temperatur": null,
+                            "Feuchtigkeit": null,
+                            "Druck": null,
+                            "Licht": null,
+                            "Pegel-oben": 1,
+                            "pegel-unten": null
+                        },
+                        {
+                            "Ort": "Regentonne unten",
+                            "Temperatur": null,
+                            "Feuchtigkeit": null,
+                            "Druck": null,
+                            "Licht": null,
+                            "Pegel-oben": null,
+                            "pegel-unten": 1
+                        }
+                    ]
+                }
+}
