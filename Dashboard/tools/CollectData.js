@@ -5,9 +5,15 @@ External script to collect and manipulate data
 //* installed libarys
 const moment = require('moment');
 
-
+/**
+ * function to convert date from integer version into german date version
+ * 
+ * @param {int} dateAsInt - date as integer
+ * @returns date in DD.MM.YYYY 
+ *  
+ */
 function convertDate(dateAsInt) {
-    return moment(String(dateAsInt), "YYYY-MM-DD");   
+    return moment(dateAsInt).format("DD.MM.YYYY");   
 }
 
 function collectData() {

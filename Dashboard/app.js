@@ -53,7 +53,8 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/test1', (req, res, next) => {
-  console.log(convertDate(202109030));
+  let nDate = convertDate(202109030);
+  console.log(nDate instanceof String);
   res.send(mariadbObject);
 });
 
