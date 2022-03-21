@@ -24,14 +24,12 @@ function convertDate(dateAsInt) {
 function convertTime(timeAsInt) {
     // convert time as integer version into string to split it
     let timeString = String(timeAsInt);
-
-
-
+    let timeStamp = timeString.split();
 
 }
 
 
-function collectData() {
+function collectAllData(rowData) {
     // create arrays to collect data in specific place
     let date = [];
     let time = [];
@@ -42,15 +40,32 @@ function collectData() {
     let waterLevel = [];
 }
 
+/**
+ * Takes each set of the same time and add it to one Dataset
+ * 
+ * @param {String} seriesOfData 
+ */
+function summarizeDataset(seriesOfData) {
+    summarizedDataset = {
+        //"date": 
+    }
+}
 
-//* tools to convert from row data into (real-world) informations
+function sortDataBy(data_pack, topic) {
 
+    var sortedDataSet = [];
+    var topic_key = String(topic).toLocaleUpperCase();
 
+    data_pack.forEach(element => {
+        sortedDataSet.push({
+            "DATUM": element.DATUM,
+            "ZEIT": element.ZEIT,
+            "ORT": element.ORT,
+            [topic_key]: element[topic_key]
+        });
+        return sortedDataSet;
+    });
 
+    //
+}
 
-
-module.exports = {
-    convertDate: convertDate,
-    convertTime: convertTime
-  };
-  

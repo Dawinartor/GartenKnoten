@@ -1,7 +1,3 @@
-//TODO: Chart.js verfügbar machen & Beispiel charts erstellen
-//TODO: Alle Methoden in app.js verfügbar machen
-//TODO: Als Parameter db daten verwenden
-
 // Manipulate DOM elements
 //const headLine = document.getElementById('headLine'); //Headline is equal to shown data
 //const ctx = document.getElementById('myChart'); //Visual chart.js component
@@ -48,11 +44,14 @@ function callHelligkeit() {
 
     // try to access data from '/collectDataFromDB' through fetchAPI
     const url = 'http://localhost:4001/collectDataFromDB';
+    var res;
     fetch(url)
     .then((collectedData) => collectedData.json())
     .then(function(data) {
-        console.log(data);
+        res = sortDataBy(data ,"TEMPERATUR");
+        console.log(res);
     })
+
 
     // example from charjs.org
    createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
@@ -81,4 +80,26 @@ function callWlanSignal() {
 // Spannung 
 function callSpannung() {
     headLine.innerHTML = "Spannung";
+}
+
+
+
+//* Tools for collecting & manipulating data
+function sortDataBy(data_pack, topic) {
+
+    var sortedDataSet = [];
+    var topic_key = String(topic).toLocaleUpperCase();
+
+    data_pack.forEach(element => {
+        sortedDataSet.push({
+            "DATUM": element.DATUM,
+            "ZEIT": element.ZEIT,
+            "ORT": element.ORT,
+            [topic_key]: element[topic_key]
+        });
+    });
+    return sortedDataSet;
+
+
+    // sort between indoor & outdoor
 }

@@ -1,7 +1,7 @@
 var mariadb = require('mariadb');
 
 var pool = mariadb.createPool({
-    host: '192.168.0.119', // Replace with your host name
+    host: '192.168.1.101', // Replace with your host name
     port: '3306', // Replace with your database port, default 3306
     user: 'root', // Replace with your database username
     password: 'root', // Replace with your database password
@@ -9,6 +9,7 @@ var pool = mariadb.createPool({
     connectionLimit: 5 
   }); 
 
+  
 /**
  * Tests connection with remote DB
  */
@@ -59,34 +60,3 @@ module.exports = {
   callDatasets: callDatasets, 
   pool: pool
 };
-
-
-
-/*
-pool.getConnection()
-.then(conn => {
-
-conn.query("SELECT * FROM Daten LIMIT 2") // conn.query("SELECT * FROM Daten")
-    .then((rows) => {
-    //console.log(rows); //[ {val: 1}, meta: ... ]
-    var json = JSON.stringify(rows);
-    var data = JSON.parse(json);
-    console.log(data[1].TEMPERATUR);
-    })
-
-    .then((res) => {
-    //console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
-    conn.end();
-    })
-
-    .catch(err => {
-    //handle error
-    console.log(err); 
-    conn.end();
-    })
-    
-}).catch(err => {
-//not connected
-});
-
-*/

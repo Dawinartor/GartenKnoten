@@ -2,7 +2,8 @@
     "idea": "connect all datasets of one date and time into one dataset",
     "comment": " ",
     "example": {
-                    "dataset": "10:00:06 - 29.09.2021",
+                    "date": "2013-02-08",
+                    "time": "09:30:26",
                     "places": [
                         {
                             "Ort": "Garten",
