@@ -2,6 +2,14 @@
 External script to collect and manipulate data
 */
 
+//* installed libarys
+const moment = require('moment');
+
+
+function convertDate(dateAsInt) {
+    return moment(String(dateAsInt), "YYYY-MM-DD");   
+}
+
 function collectData() {
     // create arrays to collect data in specific place
     let date = [];
@@ -16,6 +24,11 @@ function collectData() {
 
 //* tools to convert from row data into (real-world) informations
 
-function convertDate(rowDate) {
-    // calc date into 
-}
+
+
+
+
+module.exports = {
+    convertDate: convertDate
+  };
+  

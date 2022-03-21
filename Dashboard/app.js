@@ -2,6 +2,7 @@ const express = require('express');
 const res = require('express/lib/response');
 const app = express();
 const path = require('path')
+const moment = require('moment');
 
 // Serves Express Yourself website
 app.use(express.static('public'));
@@ -9,6 +10,7 @@ app.use(express.static('public'));
 // Use functions from other files
 const { pool } = require('./tools/db');
 const { testConnectWithDB, callDatasets } = require('./tools/db');
+const { convertDate } = require('./tools/CollectData');
 
 //testConnectWithDB();
 //callDatasets([1,2,3,4,5]);
@@ -18,7 +20,7 @@ var mariadbObject;
 var mariadb = require('mariadb');
 //TODO: Add dotenv package with Dotenv environment variables from .env files
 mariadb.createConnection({
-    host: '192.168.0.119', // Replace with your host name
+    host: '192.168.1.101', // Replace with your host name
     port: '3306', // Replace with your database port, default 3306
     user: 'root', // Replace with your database username
     password: 'root', // Replace with your database password
@@ -46,13 +48,12 @@ mariadb.createConnection({
 
 
 app.get('/', (req, res, next) => {
-  console.log("mariadbObject");
-  res.send('Hallo')
+  console.log("Hallo Welt");
+  res.send('Hallo');
 });
 
 app.get('/test1', (req, res, next) => {
-  console.log(mariadbObject);
-//  console.log(dbCollectedData);
+  console.log(convertDate(202109030));
   res.send(mariadbObject);
 });
 
