@@ -20,8 +20,37 @@ const { convertDate } = require('./tools/CollectData');
 
 // End-point to collect all data from DB
 app.get('/collectAllDataFromDB', (req, res, next) => {
-  getDataBySpecificDate("20210903");
+
+  // array with all date elements
+  let dateArray = [];
+
+  // call first all Data of Datum tabel 
+  pool.getConnection()
+  .then(connection => {
+    connection.query('SELECT * FROM Daten')
+    .then((rows) => {
+      rows.forEach(element => {
+        dateArray.push({
+          "Datum": element.DATUM,
+          "Zeit":  element.ZEIT
+        });
+      });
+      console.log(dateArray);
+    })
+
+
+  // iterate through each datum to get the dataset
+  .then(connection => {
+    //connection.query('SELECT * FROM Daten WHERE Datum=' + )
+    connection.query('SELECT * FROM Daten')
+    .then((rows) => {
+      console.log(rows[0]);
+    })
+  })
 })
+})
+
+
 
 // End-point to collect data of specific key
 app.get('/collectDataBy/:key', (req, res, next) => {
@@ -71,7 +100,9 @@ app.get('/callTestData', (req, res, next) => { //! IS WORKING
 
 
 //* --- Connect to database ---
-function 
+function connectDB() {
+  return pool.getConnection()
+}
 
 
 app.listen(PORT, () => {
