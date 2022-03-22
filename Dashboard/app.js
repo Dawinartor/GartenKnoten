@@ -4,13 +4,14 @@ const app = express();
 const path = require('path')
 const moment = require('moment');
 var mariadb = require('mariadb');
+const PORT = process.env.PORT || 4001;
 
 // Serves Express Yourself website
 app.use(express.static('public'));
 
 // Use functions from other files
 const { pool } = require('./tools/db');
-const { testConnectWithDB, callDatasets } = require('./tools/db');
+const { testConnectWithDB, callDatasets, getDataBySpecificDate } = require('./tools/db');
 const { convertDate } = require('./tools/CollectData');
 
 
@@ -18,12 +19,18 @@ const { convertDate } = require('./tools/CollectData');
 //app.get('/collectDataFromDB/:howManyDatasets', (req, res, next) => {
 
 // End-point to collect all data from DB
-app.get('/collectDataFromDB', (req, res, next) => {
+app.get('/collectAllDataFromDB', (req, res, next) => {
+  getDataBySpecificDate("20210903");
+})
+
+// End-point to collect data of specific key
+app.get('/collectDataBy/:key', (req, res, next) => {
 
   //TODO: Add dotenv package with Dotenv environment variables from .env files
   pool.getConnection()
   .then(connection => { // in case of success
-    connection.query("SELECT * FROM Daten")
+    // Take page informations and use them as "key" to get specific data
+    connection.query(`SELECT * FROM Daten WHERE ` + String(key) + ` IN `)
     .then(rows => {
       connection.end();
       res.send(rows);
@@ -63,7 +70,9 @@ app.get('/callTestData', (req, res, next) => { //! IS WORKING
 
 
 
-const PORT = process.env.PORT || 4001;
+//* --- Connect to database ---
+function 
+
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

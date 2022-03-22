@@ -1,14 +1,102 @@
 // Manipulate DOM elements
-//const headLine = document.getElementById('headLine'); //Headline is equal to shown data
-//const ctx = document.getElementById('myChart'); //Visual chart.js component
+var headLine = document.getElementById('headLine'); //Headline is equal to shown data
+var ctx = document.getElementById('myChart'); //Visual chart.js component
 
-// Methods to collect data from app.js and visualize them in script.js
+
+
+
+
+// Informationen Button
+// 
+function clickInformationen() {    
+    headLine.innerHTML = "Hilfestellung & Letzte Änderungen";
+}
+
+// Gesamtübersicht Button
+// Übersicht aller Daten in einem Graphen
+function clickGesamtübersicht() {    
+    headLine.innerHTML = "Übersicht der gesammten Daten";
+
+
+
+        // example from charjs.org
+   createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
+}
+
+// Helligkeit Button
+// helligkeit drinnen & draußen
+function clickHelligkeit() {
+    // Manipulate DOM elements
+    headLine.innerHTML = "Hellikeit drinnen & Draußen";
+
+
+
+}
+
+// Temperatur Button
+// Temperatur drinnen & draußen
+function clickTemperatur() {    
+    headLine.innerHTML = "Temperatur drinnen & draußen";
+}
+
+// Feuchtigkeit Button
+// Feuchtigkeit drinnen & draußen
+function clickFeuchtigkeit() {
+    headLine.innerHTML = "Feuchtigkeit drinnen & Draußen";
+}
+
+// Luftdruck Button
+// Luftdruck drinnen & draußen
+function clickLuftdruck() {
+    headLine.innerHTML = "Luftdruck drinnen & Draußen";
+}
+
+// WLAN signal Button
+// WLAN signal
+function clickWlanSignal() {
+    headLine.innerHTML = "WLAN Signal";
+}
+
+// Spannung Button
+// Spannung 
+function clickSpannung() {
+    headLine.innerHTML = "Spannung";
+}
+
+
+
+//* --- Tools for collecting & manipulating data ---
+
+function sortDataBy(data_pack, topic) {
+
+    var sortedDataSet = [];
+    var topic_key = String(topic).toLocaleUpperCase();
+
+    data_pack.forEach(element => {
+        sortedDataSet.push({
+            "DATUM": element.DATUM,
+            "ZEIT": element.ZEIT,
+            "ORT": element.ORT,
+            [topic_key]: element[topic_key]
+        });
+    });
+    return sortedDataSet;
+
+
+    // sort between indoor & outdoor
+}
+
+
+
+//* --- Tools to create chartJS grapghs ---
+
+
 /** Creates a linear graph.
  * 
  * @param {string[]} labels informations for x-axis
  * @param {int[]} dataToVisualize informations for y-axis
  */
-function createLineGraph(labels, dataToVisualize, htmlCompoenent) {
+ function createLineGraph(labels, dataToVisualize, htmlCompoenent) {
 
     const data = {
         labels: labels,
@@ -33,73 +121,4 @@ function createLineGraph(labels, dataToVisualize, htmlCompoenent) {
     };
 
     const myChart = new Chart(htmlCompoenent, config);
-}
-
-// helligkeit drinnen & draußen
-function callHelligkeit() {
-    const headLine = document.getElementById('headLine'); //Headline is equal to shown data
-    const ctx = document.getElementById('myChart'); //Visual chart.js component
-    // Manipulate DOM elements
-    headLine.innerHTML = "Hellikeit drinnen & Draußen";
-
-    // try to access data from '/collectDataFromDB' through fetchAPI
-    const url = 'http://localhost:4001/collectDataFromDB';
-    var res;
-    fetch(url)
-    .then((collectedData) => collectedData.json())
-    .then(function(data) {
-        res = sortDataBy(data ,"TEMPERATUR");
-        console.log(res);
-    })
-
-
-    // example from charjs.org
-   createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
-}
-
-// Temperatur drinnen & draußen
-function callTemperatur() {    
-    headLine.innerHTML = "Temperatur drinnen & draußen";
-}
-
-// Feuchtigkeit drinnen & draußen
-function callFeuchtigkeit() {
-    headLine.innerHTML = "Feuchtigkeit drinnen & Draußen";
-}
-
-// Luftdruck drinnen & draußen
-function callLuftdruck() {
-    headLine.innerHTML = "Luftdruck drinnen & Draußen";
-}
-
-// WLAN signal
-function callWlanSignal() {
-    headLine.innerHTML = "WLAN Signal";
-}
-
-// Spannung 
-function callSpannung() {
-    headLine.innerHTML = "Spannung";
-}
-
-
-
-//* Tools for collecting & manipulating data
-function sortDataBy(data_pack, topic) {
-
-    var sortedDataSet = [];
-    var topic_key = String(topic).toLocaleUpperCase();
-
-    data_pack.forEach(element => {
-        sortedDataSet.push({
-            "DATUM": element.DATUM,
-            "ZEIT": element.ZEIT,
-            "ORT": element.ORT,
-            [topic_key]: element[topic_key]
-        });
-    });
-    return sortedDataSet;
-
-
-    // sort between indoor & outdoor
 }

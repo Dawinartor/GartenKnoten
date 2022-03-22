@@ -9,7 +9,7 @@ var pool = mariadb.createPool({
     connectionLimit: 5 
   }); 
 
-  
+
 /**
  * Tests connection with remote DB
  */
@@ -25,17 +25,23 @@ function testConnectWithDB() { //? is connection object returnable?
 }
 
 
-/**
- * Converts row DB data to Javascript objects
- * 
- * @param {*} dbData - row DB data
- * @returns Javascript object
- */
-function dbDataToObject(dbData) {
-  let json = JSON.stringify(dbData); // Converts value to JSON
-  let jsObject = JSON.parse(json); // Converts JSON to JS object
-  return jsObject;
+function getDataBySpecificDate(date) { // example by DATUM
+  pool.getConnection()
+  .then(connection => {
+    connection.json('SELECT * FROM Daten')
+    .then((rows) => {
+      console.log(rows)
+      return rows;
+    })
+    .catch(err => {
+      console.log("# Daten wurden nicht uebergeben #");
+    });
+  })
+  .catch(err => { // in case of failure
+    console.log("## Verbindung konnte nicht aufgebaut werden ##");
+  })
 }
+
 
 /**
  * Call
@@ -58,5 +64,6 @@ function callDatasets(howManyDatasets=1) {
 module.exports = {
   testConnectWithDB: testConnectWithDB,
   callDatasets: callDatasets, 
+  getDataBySpecificDate: getDataBySpecificDate,
   pool: pool
 };
