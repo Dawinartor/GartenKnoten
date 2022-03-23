@@ -2,17 +2,25 @@ const express = require('express');
 const res = require('express/lib/response');
 const app = express();
 const path = require('path')
-const moment = require('moment');
-var mariadb = require('mariadb');
 const PORT = process.env.PORT || 4001;
+
 
 // Serves Express Yourself website
 app.use(express.static('public'));
 
+
 // Use functions from other files
 const { pool } = require('./tools/db');
 const { testConnectWithDB, callDatasets, getDataBySpecificDate } = require('./tools/db');
-const { convertDate } = require('./tools/CollectData');
+const { testOutput, getAllDates, getDataByIntervall } = require('./tools/CollectData');
+
+
+//* --- GET methods ---
+
+//! this is the landingpage 
+app.get('/', (req, res, next) => {
+  res.send('Hallo');
+});
 
 
 // TODO: Extend the application with a GET method to collect data from the server in a intervall
@@ -21,34 +29,31 @@ const { convertDate } = require('./tools/CollectData');
 // End-point to collect all data from DB
 app.get('/collectAllDataFromDB', (req, res, next) => {
 
+  /*
   // array with all date elements
   let dateArray = [];
+  // collection array
+  let collArr = [];
 
-  // call first all Data of Datum tabel 
+  // call first all Data of Datum tabel to show all available dates
   pool.getConnection()
   .then(connection => {
     connection.query('SELECT * FROM Daten')
     .then((rows) => {
-      rows.forEach(element => {
-        dateArray.push({
-          "Datum": element.DATUM,
-          "Zeit":  element.ZEIT
-        });
-      });
-      console.log(dateArray);
-    })
-
-
-  // iterate through each datum to get the dataset
-  .then(connection => {
-    //connection.query('SELECT * FROM Daten WHERE Datum=' + )
-    connection.query('SELECT * FROM Daten')
-    .then((rows) => {
-      console.log(rows[0]);
+      dateArray = getAllDates(rows);
+      //console.log(dateArray);
+      collArr = getDataByIntervall(dateArray[0], dateArray[dateArray.length - 1]);
+      res.send(collArr);
     })
   })
 })
-})
+*/
+
+let test = getAllDates();
+console.log(test);
+
+});
+
 
 
 
@@ -74,13 +79,6 @@ app.get('/collectDataBy/:key', (req, res, next) => {
 })
 
 
-//! this is the landingpage 
-app.get('/', (req, res, next) => {
-  console.log("Hello");
-  res.send('Hallo');
-});
-
-
 //TODO: https://bm.enthuses.me/buffered.php?bref=729
 
 app.get('/callTestData', (req, res, next) => { //! IS WORKING
@@ -97,12 +95,11 @@ app.get('/callTestData', (req, res, next) => { //! IS WORKING
   })
 });
 
+app.get('/test', (req, res, next) => {
+  testOutput();
+})
 
 
-//* --- Connect to database ---
-function connectDB() {
-  return pool.getConnection()
-}
 
 
 app.listen(PORT, () => {

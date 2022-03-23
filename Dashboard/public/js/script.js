@@ -2,6 +2,8 @@
 var headLine = document.getElementById('headLine'); //Headline is equal to shown data
 var ctx = document.getElementById('myChart'); //Visual chart.js component
 
+// test
+const { testOutput } = require('../../tools/CollectData')
 
 
 
@@ -10,6 +12,7 @@ var ctx = document.getElementById('myChart'); //Visual chart.js component
 // 
 function clickInformationen() {    
     headLine.innerHTML = "Hilfestellung & Letzte Änderungen";
+    testOutput()
 }
 
 // Gesamtübersicht Button

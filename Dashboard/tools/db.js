@@ -1,7 +1,7 @@
 var mariadb = require('mariadb');
 
 var pool = mariadb.createPool({
-    host: '192.168.1.101', // Replace with your host name
+    host: '192.168.1.102', // Replace with your host name
     port: '3306', // Replace with your database port, default 3306
     user: 'root', // Replace with your database username
     password: 'root', // Replace with your database password
@@ -15,13 +15,13 @@ var pool = mariadb.createPool({
  */
 function testConnectWithDB() { //? is connection object returnable?
   pool.getConnection() // promise is used here
-  .then(success => { // if promise successfull
+  .then(con => { // if promise successfull
     console.log("Successfully connected");
     pool.end();
-    }, noSuccess => { // if promise unsuccessfull
+    }, con => { // if promise unsuccessfull
     console.log("No connection established"); 
     })
-  //.then(success.end());
+  .then(con.end());
 }
 
 
