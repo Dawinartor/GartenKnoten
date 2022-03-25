@@ -26,8 +26,9 @@ var pool = mariadb.createPool({
  * @param {int} dateAsInt - date as integer
  * @returns momentjs object
  */
-function convertDate(dateAsInt) {
-    return moment(dateAsInt).format("DD.MM.YYYY");   
+function convertDate(dateAsInt, momentjsFormat="DD.MM.YYYY") { 
+    let dateEntry = moment(dateAsInt);
+    return moment(dateEntry).format(momentjsFormat);   
 }
 
 /**

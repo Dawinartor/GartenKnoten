@@ -46,6 +46,10 @@ app.get('/collectAllDataFromDB', (req, res, next) => {
       // 5. use dateSet to collect all available data of 
       connection.query(`SELECT * FROM Daten WHERE Datum >= ${getFirstItem(dateSet)} and Datum <= ${getLastItem(dateSet)} ORDER BY Datum`)
       .then((result) => {
+        // 6. create object fo chartJS to visualize the manipulated data
+
+        // 7. resolve the object on the path
+        res.send(result);
         console.log(result);
       })
       
