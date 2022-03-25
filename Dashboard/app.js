@@ -12,7 +12,7 @@ app.use(express.static('public'));
 // Use functions from other files
 const { pool } = require('./tools/db');
 const { testConnectWithDB, callDatasets, getDataBySpecificDate } = require('./tools/db');
-const { testOutput, getAllDates, getDataByIntervall } = require('./tools/CollectData');
+const { testOutput, getAllDates, getDataByIntervall, getLastItem, getFirstItem } = require('./tools/CollectData');
 
 
 //* --- GET methods ---
@@ -28,8 +28,37 @@ app.get('/', (req, res, next) => {
 
 // End-point to collect all data from DB
 app.get('/collectAllDataFromDB', (req, res, next) => {
+  // to collect all data from DB there have to happen many steps
 
-  /*
+  // variables to safe side information
+  var dateSet;
+  var allAvailableData;
+
+  // 1. connect route with DB 
+  pool.getConnection()
+  // 2. send query command to DB
+  .then((connection) => {
+    connection.query('SELECT * FROM Daten')
+    // 3. get all data depending on query command from DB
+    .then((rows) => {
+      // 4. use db rows to filter for unique date elements
+      dateSet = getAllDates(rows);
+      // 5. use dateSet to collect all available data of 
+      connection.query(`SELECT * FROM Daten WHERE Datum >= ${getFirstItem(dateSet)} and Datum <= ${getLastItem(dateSet)} ORDER BY Datum`)
+      .then((result) => {
+        console.log(result);
+      })
+      
+    })
+  })
+
+  .finally(() => {
+    pool.end();
+  });
+
+})
+
+/*
   // array with all date elements
   let dateArray = [];
   // collection array
@@ -47,13 +76,14 @@ app.get('/collectAllDataFromDB', (req, res, next) => {
     })
   })
 })
-*/
+
 
 let test = getAllDates();
 console.log(test);
 
 });
 
+*/
 
 
 

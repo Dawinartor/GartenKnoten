@@ -76,40 +76,39 @@ function sortDataBy(data_pack, topic) {
 //* --- collect specific data ---
 
 /**
- * Collects all available date elements
+ * Collects all available dates as unique elements
  * 
  * @param {Array} db_rows - data from database as array
- * @returns {Array} dateArray - return collected dates
+ * @returns {Set} dateSet - return collected dates
  */
-function getAllDates() {
+function getAllDates(db_rows) {
 
-    // array for result object
-    var dateArray = [];
+    // each element is unique in a list
+    var dateSet = new Set();
 
-    pool.getConnection()
-    .then(connection => {
-        connection.query('SELECT * FROM Daten')
-        .then((rows) => {
-            // collect each Date and Time
-            rows.forEach(element => {
-            
-                dateArray.push(
-                element.DATUM
-                //"ZEIT":  element.ZEIT
-                );
+    db_rows.forEach(element => {
+        
+        dateSet.add(
+          element.DATUM
+        );
+        
+    });
 
-            });
-        })
-        pool.end();
-   })
-   return dateArray
-
-
-   .finally(() => {
-        connection.close(); // (C)
-  });
+    return dateSet;
 }
 
+// get last item in a Set
+function getLastItem(_set) {
+    return [..._set].pop();
+}
+
+// get first item in a Set
+function getFirstItem(_set) {
+    let iter = _set.values();
+    let first = iter.next();
+    let value = first.value;
+    return value;
+}
 
 
 // get data by date intervall
@@ -154,5 +153,7 @@ function testOutput() {
 module.exports = { 
     testOutput: testOutput,
     getAllDates: getAllDates,
-    getDataByIntervall: getDataByIntervall
+    getDataByIntervall: getDataByIntervall,
+    getLastItem: getLastItem,
+    getFirstItem: getFirstItem
  };
