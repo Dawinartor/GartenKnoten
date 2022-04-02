@@ -1,7 +1,7 @@
 var mariadb = require('mariadb');
 
 var pool = mariadb.createPool({
-    host: '192.168.1.103', // Replace with your host name
+    host: '192.168.1.100', // Replace with your host name
     port: '3306', // Replace with your database port, default 3306
     user: 'root', // Replace with your database username
     password: 'root', // Replace with your database password
@@ -43,6 +43,7 @@ function getDataBySpecificDate(date) { // example by DATUM
     console.log("## Verbindung konnte nicht aufgebaut werden ##");
   })
 }
+
 
 
 /**

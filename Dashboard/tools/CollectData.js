@@ -2,7 +2,7 @@
 External script to collect and manipulate data
 */
 
-//* installed libarys
+//* installed libaries
 const moment = require('moment');
 var mariadb = require('mariadb');
 
@@ -18,7 +18,7 @@ var pool = mariadb.createPool({
 
 
 
-//* --- tools to convert data in specific format ---
+//~ --- tools to convert data in specific format ---
 
 /**
  * function to convert date from integer version into german date version
@@ -98,17 +98,18 @@ function getAllDates(db_rows) {
     return dateSet;
 }
 
-// get last item in a Set
-function getLastItem(_set) {
-    return [..._set].pop();
+//^ ---  methods to process data ---
+
+/**
+ * Get 
+ */
+function getDataByDate(startDate, endData, ) {
+    
 }
 
 // get first item in a Set
 function getFirstItem(_set) {
-    let iter = _set.values();
-    let first = iter.next();
-    let value = first.value;
-    return value;
+    
 }
 
 
@@ -155,6 +156,5 @@ module.exports = {
     testOutput: testOutput,
     getAllDates: getAllDates,
     getDataByIntervall: getDataByIntervall,
-    getLastItem: getLastItem,
     getFirstItem: getFirstItem
  };

@@ -99,18 +99,21 @@ function sortDataBy(data_pack, topic) {
 
     const data = {
         labels: labels,
-        datasets: [{
-          label: 'Blaaaaaa',
-          backgroundColor: 'rgb(255, 99, 232)',
-          borderColor: 'rgb(1, 1, 1)',
-          data: dataToVisualize
-        },
-        {
-            label: 'Blooooo',
-            backgroundColor: 'rgb(25, 39, 132)',
-            borderColor: 'rgb(100, 100, 100)',
-            data: dataToVisualize
-          }]
+        datasets: 
+        [
+            {
+                label: 'Blaaaaaa',
+                backgroundColor: 'rgb(255, 99, 232)',
+                borderColor: 'rgb(1, 1, 1)',
+                data: dataToVisualize
+            },
+            {
+                label: 'Blooooo',
+                backgroundColor: 'rgb(25, 39, 132)',
+                borderColor: 'rgb(100, 100, 100)',
+                data: dataToVisualize
+            }
+        ]
       };
 
     const config = {
