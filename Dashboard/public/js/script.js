@@ -17,7 +17,7 @@ function clickGesamtübersicht() {
 
 
 
-        // example from charjs.org
+   // example from charjs.org
    createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
 }
 

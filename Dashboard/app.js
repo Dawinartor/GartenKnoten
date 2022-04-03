@@ -1,4 +1,4 @@
-"use strict"; //* to avoid problems
+"use strict";
 
 const express = require('express');
 const moment = require('moment');
@@ -33,13 +33,6 @@ app.get('/', (req, res, next) => {
 app.get('/collectAllDataFromDB', (req, res, next) => {
   // to collect all data from DB there have to happen many steps
 
-  // variables to safe side information
-  var allAvailableData;
-  var dateLimits = {
-    'firstEntry': '',
-    'lastEntry': ''
-  };
-
   // 1. connect route with DB 
   pool.getConnection()
   // 2. send query command to DB
@@ -47,10 +40,17 @@ app.get('/collectAllDataFromDB', (req, res, next) => {
     connection.query('SELECT * FROM Daten')
     // 3. get all data from DB
     .then((rows) => {
-      // 4. use db rows to filter for unique date elements
-      allAvailableData = rows
+      // 4. resolve data to the path
+      res.json(rows);
     })
 
+    .finally(() => {
+      pool.end();
+    });
+  })
+})
+
+/*
     //+ get first entry
     connection.query('SELECT * FROM Daten ORDER BY Datum LIMIT 1')
     .then((rows) => {
@@ -66,14 +66,9 @@ app.get('/collectAllDataFromDB', (req, res, next) => {
     .then((rows) => {
       console.log(dateLimits);
     })
+
   })
-
-  .finally(() => {
-    pool.end();
-  });
-
-
-})
+*/
 
 
 
@@ -119,42 +114,6 @@ app.get('/test', (req, res, next) => {
   testOutput();
 })
 
-
-
-
-// --- manipulate data for chartJS---
-
-function createChartjsObject(data) {
-
-  // a list to organize the data
-  var jsonForChartJS;
-
-  // organization labels for datasets
-  let dataLabels = [
-    "Temperatur", 
-    "Feuchtigkeit",
-    "Druck", "Licht",
-    "Wasserstand"
-  ]
-
-  let dataSet = { 
-    label: "Temperatur", //? how to get json key name?
-    data: []
-
-  }
-
-
-
-}
-
-
-// --- helper functions to format information ---
-
-function formatDateTime(intDate, intTime) {
-  let formatedDate = moment(intrDate).format("DD.MM.YYYY");
-  let formatedTime = moment(intTime, "HH:mm:ss").format("hh:mm A");
-  return newDate;
-}
 
 
 
