@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require('express');
-const moment = require('moment');
 const res = require('express/lib/response');
 const app = express();
 const path = require('path')
@@ -30,7 +29,7 @@ app.get('/', (req, res, next) => {
 //app.get('/collectDataFromDB/:howManyDatasets', (req, res, next) => {
 
 // End-point to collect all data from DB
-app.get('/collectAllDataFromDB', (req, res, next) => {
+app.get('/get/gesamtuebersicht', (req, res, next) => {
   // to collect all data from DB there have to happen many steps
 
   // 1. connect route with DB 
@@ -45,7 +44,7 @@ app.get('/collectAllDataFromDB', (req, res, next) => {
     })
 
     .finally(() => {
-      pool.end();
+      //?pool.end(); TODO: Do I need this?
     });
   })
 })

@@ -2,6 +2,9 @@
 var headLine = document.getElementById('headLine'); //Headline is equal to shown data
 var ctx = document.getElementById('myChart'); //Visual chart.js component
 
+// TODO: add standard url
+const basicURL = "/get";
+let currentURL = "";
 
 
 // Informationen Button
@@ -14,11 +17,48 @@ function clickInformationen() {
 // Übersicht aller Daten in einem Graphen
 function clickGesamtübersicht() {    
     headLine.innerHTML = "Übersicht der gesammten Daten";
+    currentURL = "/gesamtuebersicht";
+    var chartjsObject = {
+        Datum: [],
 
+    };
+
+
+    //collect data by Fetch-API
+    fetch(basicURL + currentURL)
+        //' feched data as json
+        .then((resp) => resp.json()) 
+
+        //' order and sort data
+        .then((data) => {
+            // +++ sort data by date +++
+            var availableDates = new Set();
+            for (let entry in data) {
+                // ++ collect all available date elements in a set
+                availableDates.add(data[entry].DATUM);
+
+
+                //console.log( moment(data[entry].DATUM).format("DD.MM.YYYY") );
+                //console.log(data[entry].DATUM); 
+                console.log(availableDates);
+            }
+
+            
+        })
+
+        //' In case of failure
+        .catch((error) => {
+            console.log(error);
+        })
+
+        //' finalize the action
+        .finally(() => {
+            console.log("Fetch was successful");
+        })
 
 
    // example from charjs.org
-   createLineGraph(['1','2','3','4','5'], [1,2,3,4,5], ctx);
+   createLineGraph(['01.03.22','02.03.22','03.03.22','04.03.22','05.03.22', '06.03.22', '07.03.22', '08.03.22'], [[1,4,3,7,5,8,11,14],[0,3,5,6,9,10,11,17]], ctx);
 }
 
 // Helligkeit Button
@@ -86,7 +126,7 @@ function sortDataBy(data_pack, topic) {
 
 
 
-//* --- Tools to create chartJS grapghs ---
+// --- Tools to create chartJS grapghs ---
 
 
 /** Creates a linear graph.
@@ -101,16 +141,34 @@ function sortDataBy(data_pack, topic) {
         datasets: 
         [
             {
-                label: 'Blaaaaaa',
+                label: 'TEMPERATUR',
                 backgroundColor: 'rgb(255, 99, 232)',
                 borderColor: 'rgb(1, 1, 1)',
-                data: dataToVisualize
+                data: dataToVisualize[0]
             },
             {
-                label: 'Blooooo',
+                label: 'FEUCHTIGKEIT',
                 backgroundColor: 'rgb(25, 39, 132)',
                 borderColor: 'rgb(100, 100, 100)',
-                data: dataToVisualize
+                data: dataToVisualize[1]
+            },
+            {
+                label: 'DRUCK',
+                backgroundColor: 'rgb(215, 39, 132)',
+                borderColor: 'rgb(100, 100, 100)',
+                data: dataToVisualize[0]
+            },
+            {
+                label: 'LICHT',
+                backgroundColor: 'rgb(25, 139, 132)',
+                borderColor: 'rgb(100, 100, 100)',
+                data: dataToVisualize[1]
+            },
+            {
+                label: 'WASSERPEGEL',
+                backgroundColor: 'rgb(25, 39, 232)',
+                borderColor: 'rgb(100, 100, 100)',
+                data: dataToVisualize[0]
             }
         ]
       };
