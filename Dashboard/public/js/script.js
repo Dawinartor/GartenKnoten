@@ -4,7 +4,6 @@ var ctx = document.getElementById('myChart'); //Visual chart.js component
 
 
 
-
 // Informationen Button
 // 
 function clickInformationen() {    
