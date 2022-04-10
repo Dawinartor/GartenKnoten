@@ -1,6 +1,6 @@
 [
     {
-      DATUM: 19700101,
+      DATUM: 19700101,,
       ZEIT: 10006,
       ORT: "Garten",
       TEMPERATUR: "22.60",
