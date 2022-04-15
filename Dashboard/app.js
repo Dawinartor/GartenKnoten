@@ -21,7 +21,7 @@ const { testOutput, getAllDates, getDataByIntervall,  getFirstItem } = require('
 
 //! this is the landingpage 
 app.get('/', (req, res, next) => {
-  // 
+  res.send('Hello World');
 });
 
 
@@ -49,26 +49,39 @@ app.get('/get/gesamtuebersicht', (req, res, next) => {
   })
 })
 
-/*
-    //+ get first entry
-    connection.query('SELECT * FROM Daten ORDER BY Datum LIMIT 1')
+// End-Point to collect all available dates (from - to)
+app.get('/get/availableDates', (req, res, next) => {
+
+  // json as return value
+  ret = {
+    first: '',
+    last: ''
+  }
+
+  pool.getConnection()
+  .then(connection => {
+
+    // besorge erstes Datum
+    connection.query('Select Datum from DATEN order by datum LIMIT 1')
+    // speichere Datum in json
     .then((rows) => {
-      dateLimits["firstEntry"] = rows[0].DATUM;
+      ret.first = rows[0];
     })
 
-    //+ get last entry
-    connection.query('SELECT * FROM Daten ORDER BY Datum desc LIMIT 1')
+    // besorge letztes Datum
+    connection.query('Select Datum from DATEN order by datum desc LIMIT 1')
+    // speichere Datum in json
     .then((rows) => {
-      dateLimits["lastEntry"] = rows[0].DATUM;
+      ret.last = rows[0];
+      res.json(ret);
     })
 
-    .then((rows) => {
-      console.log(dateLimits);
+    .finally(() => {
+      pool.end();
     })
 
   })
-*/
-
+})
 
 
 // End-point to collect data of specific key

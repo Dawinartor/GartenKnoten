@@ -20,8 +20,12 @@ function clickGesamtübersicht() {
     currentURL = "/gesamtuebersicht";
     var chartjsObject = {
         Datum: [],
-
     };
+
+    //TODO: https://github.com/Dawinartor/GartenKnoten/issues/1
+    fetch() // fetch from /get/availableDates
+
+    // give fetched information to calender-component
 
 
     //collect data by Fetch-API
