@@ -21,7 +21,7 @@ const { testOutput, getAllDates, getDataByIntervall,  getFirstItem } = require('
 
 //! this is the landingpage 
 app.get('/', (req, res, next) => {
-  res.send('Hallo');
+  // 
 });
 
 
