@@ -11,6 +11,8 @@ const IP = "localhost"; // my network address: 192.168.1.102
 // Serves Express Yourself website
 app.use(express.static('public'));
 
+// test commit
+
 
 // Use functions from other files
 const { pool } = require('./tools/db');
